@@ -1,18 +1,17 @@
 package pl.coderslab.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "category")
 public class Category {
 
@@ -20,11 +19,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @NotNull
-    @Column(name = "name")
+    @Size(max = 100)
     private String name;
 
-
+    @Column(columnDefinition = "TEXT", nullable = true)
+    private String description;
 
 }
