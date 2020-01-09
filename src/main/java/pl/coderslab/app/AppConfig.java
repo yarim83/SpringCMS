@@ -6,16 +6,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 import javax.persistence.EntityManagerFactory;
-import java.lang.annotation.Annotation;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "pl.coderslab")
 @EnableTransactionManagement
-public class AppConfig implements EnableWebMvc {
+public class AppConfig implements WebMvcConfigurer {
+
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+        bean.setViewClass(JstlView.class);
+        bean.setPrefix("/WEB-INF/views/");
+        bean.setSuffix(".jsp");
+
+        return bean;
+    }
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
@@ -31,13 +44,4 @@ public class AppConfig implements EnableWebMvc {
         return jpaTransactionManager;
     }
 
-    /**
-     * Returns the annotation type of this annotation.
-     *
-     * @return the annotation type of this annotation
-     */
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return null;
-    }
 }
