@@ -12,26 +12,30 @@ import java.util.List;
 @Repository
 @Transactional
 public class ArticleRepository {
-
     @PersistenceContext
     EntityManager entityManager;
 
-    private Article create(Article article){
+    public Article create(Article article){
         entityManager.persist(article);
         return article;
     }
 
-    private void delete(Article article){
+    public void delete(Article article){
         entityManager.remove(entityManager.contains(article) ?
                 article : entityManager.merge(article));
     }
 
-    private void update(Article article){
+    public void update(Article article){
        entityManager.merge(article);
     }
 
-    private List<Article> getAll(){
-        Query query = entityManager.createQuery("SELECT p FROM article p");
+    public List<Article> getAll(){
+        Query query = entityManager.createQuery("SELECT p FROM Article p");
         return query.getResultList();
+    }
+
+    public List<Article> getFiveArticle(){
+        Query query = entityManager.createQuery("SELECT p FROM Article p ORDER BY p.created DESC");
+        return query.setMaxResults(5).getResultList();
     }
 }

@@ -31,7 +31,7 @@ public class AuthorRepository {
     }
 
     private List getAll(){
-        Query query = entityManager.createQuery("SELECT p FROM author p");
+        Query query = entityManager.createQuery("SELECT p FROM Author p");
         return query.getResultList();
     }
 }

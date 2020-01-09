@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "author")
+@Entity
+@Table(name = "author")
 public class Author {
 
     @Id
@@ -27,9 +28,7 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "author_article_id", unique = true)
-    private Author author;
+
 
 }
 
