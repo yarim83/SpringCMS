@@ -5,7 +5,9 @@ import pl.coderslab.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -28,4 +30,8 @@ public class CategoryRepository {
         entityManager.merge(category);
     }
 
+    private List<Category> getAll(){
+        Query query = entityManager.createQuery("SELECT p FROM Category p");
+        return query.getResultList();
+    }
 }

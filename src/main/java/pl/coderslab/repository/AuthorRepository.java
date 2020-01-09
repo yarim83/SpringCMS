@@ -5,7 +5,9 @@ import pl.coderslab.entity.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -26,5 +28,10 @@ public class AuthorRepository {
 
     private void update(Author author){
         entityManager.merge(author);
+    }
+
+    private List getAll(){
+        Query query = entityManager.createQuery("SELECT p FROM author p");
+        return query.getResultList();
     }
 }
