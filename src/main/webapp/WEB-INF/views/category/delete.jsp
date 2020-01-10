@@ -14,6 +14,6 @@
 Are you sure ?
 </p>
 <button><a href="${contextPath}/delete-action/${categoryId}?action=true">Yes</a></button>
-<button><a href="${contextPath}delete-action/${categoryId}?action=false">No</a></button>
+<button><a href="${contextPath}/delete-action/${categoryId}?action=false">No</a></button>
 </body>
 </html>

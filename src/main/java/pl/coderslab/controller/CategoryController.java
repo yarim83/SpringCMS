@@ -3,6 +3,7 @@ package pl.coderslab.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Category;
 import pl.coderslab.repository.CategoryRepository;
@@ -32,13 +33,13 @@ public class CategoryController {
         return "redirect:/category/list";
     }
 
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Model model){
         model.addAttribute("categoryId",id);
         return "category/delete";
     }
 
-    @GetMapping("delete-action/{id}")
+    @GetMapping("/delete-action/{id}")
     public String deleteAction(@PathVariable long id, @RequestParam("action") boolean action){
         if(action){
             categoryRepository.delete(categoryRepository.getById(id));
@@ -46,5 +47,19 @@ public class CategoryController {
         return "redirect:/category/list";
     }
 
+    @GetMapping("edit/{id}")
+    public String editCategory(@PathVariable long id, Model model){
+        model.addAttribute("category", categoryRepository.getById(id));
+        return "category/edit";
+    }
+
+    @PostMapping("/edit")
+    public String updateCategory(@ModelAttribute Category category, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "category/edit";
+        }
+        categoryRepository.update(category);
+        return "redirect:/category/list";
+    }
 
 }
