@@ -16,21 +16,21 @@ public class AuthorRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    private Author create(Author author){
+    public Author create(Author author) {
         entityManager.persist(author);
         return author;
     }
 
-    private void delete(Author author){
+    public void delete(Author author) {
         entityManager.remove(entityManager.contains(author)
                 ? author : entityManager.merge(author));
     }
 
-    private void update(Author author){
+    public void update(Author author) {
         entityManager.merge(author);
     }
 
-    private List getAll(){
+    public List getAll() {
         Query query = entityManager.createQuery("SELECT p FROM Author p");
         return query.getResultList();
     }
