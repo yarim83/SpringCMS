@@ -40,6 +40,7 @@
 </table>
 
 <button><a href="${contextPath}/category/list">Category list</a> </button>
+<button><a href="${contextPath}/author/list">Author list</a> </button>
 
 
 </body>

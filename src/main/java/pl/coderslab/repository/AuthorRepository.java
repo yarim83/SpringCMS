@@ -2,6 +2,7 @@ package pl.coderslab.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.Author;
+import pl.coderslab.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,5 +34,9 @@ public class AuthorRepository {
     public List getAll() {
         Query query = entityManager.createQuery("SELECT p FROM Author p");
         return query.getResultList();
+    }
+
+    public Author getById(long id){
+        return entityManager.find(Author.class, id);
     }
 }
