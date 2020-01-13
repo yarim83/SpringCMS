@@ -37,7 +37,10 @@ public class ArticleController {
     }
 
     @PostMapping
-    public String saveArticle(@ModelAttribute Article article){
+    public String saveArticle(@ModelAttribute Article article, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "article/form";
+        }
         articleRepository.create(article);
         return "redirect:/article/list";
     }
@@ -71,12 +74,12 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @ModelAttribute("authors")
+    @ModelAttribute("author")
     public List<Author> authorList() {
         return authorRepository.getAll();
     }
 
-    @ModelAttribute("categories")
+    @ModelAttribute("category")
     public List<Category> categories() {
         return categoryRepository.getAll();
     }

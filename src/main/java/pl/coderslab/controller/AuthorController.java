@@ -28,7 +28,10 @@ public class AuthorController {
     }
 
     @PostMapping
-    public String saveAuthor(@ModelAttribute Author author){
+    public String saveAuthor(@ModelAttribute Author author, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "author/form";
+        }
         authorRepository.create(author);
         return "redirect:/author/list";
     }

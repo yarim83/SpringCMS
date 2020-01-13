@@ -28,14 +28,15 @@
     <div>
         Author:
         <form:select path="author.id">
-            <form:options items="${authors}" itemValue="id" itemLabel="firstName"/>
+            <form:option value="-" label="-Choose-"/>
+            <form:options items="${author}" itemValue="id" itemLabel="fullName"/>
         </form:select>
         <form:errors path="author" cssClass="error"/>
     </div>
 
     <div>
         Categorie:
-        <form:select path="categories" items="${categories}"
+        <form:select path="categories" items="${category}"
                      itemValue="id" itemLabel="name" multiple="true"/>
         <form:errors path="categories" cssClass="error"/>
     </div>

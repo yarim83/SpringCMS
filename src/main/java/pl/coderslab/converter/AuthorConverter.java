@@ -12,6 +12,10 @@ public class AuthorConverter implements Converter<String, Author> {
 
     @Override
     public Author convert(String s) {
+        if(s.equals("-")){
+            return null;
+        }
+
         return authorRepository.getById(Long.parseLong(s));
     }
 }

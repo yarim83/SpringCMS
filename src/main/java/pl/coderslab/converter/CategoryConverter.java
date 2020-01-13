@@ -6,11 +6,13 @@ import pl.coderslab.entity.Category;
 import pl.coderslab.repository.CategoryRepository;
 
 public class CategoryConverter implements Converter<String, Category> {
+
     @Autowired
     private CategoryRepository categoryRepository;
 
     @Override
     public Category convert(String s) {
+
         return categoryRepository.getById(Long.parseLong(s));
     }
 }
