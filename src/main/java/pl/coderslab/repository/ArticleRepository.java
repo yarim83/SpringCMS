@@ -2,6 +2,7 @@ package pl.coderslab.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.Article;
+import pl.coderslab.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,4 +39,8 @@ public class ArticleRepository {
         Query query = entityManager.createQuery("SELECT p FROM Article p ORDER BY p.created DESC");
         return query.setMaxResults(5).getResultList();
     }
+    public Article getById(long id){
+        return entityManager.find(Article.class,id);
+    }
+
 }

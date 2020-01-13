@@ -1,17 +1,12 @@
 package pl.coderslab.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -47,11 +42,11 @@ public class Article {
     public void preUpdate(){
         updated = LocalDateTime.now();
     }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "article_author_id", unique = true)
     private Author author;
 
-    @OneToMany
-    @JoinColumn(name = "id_article")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 }
